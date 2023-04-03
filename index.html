@@ -1,0 +1,115 @@
+<html>
+	<head>
+    <meta charset="utf-8">
+    <style>
+        .chart--container {
+  min-height: 530px;
+  width: 100%;
+  height: 100%;
+}
+
+.zc-ref {
+  display: none;
+}
+    </style>
+    <title>Grafica Gauge Demo</title>
+	</head>
+	<body>
+		<div id="myChart" class="chart--container"></div>
+	</body>
+    <script src="zingchart.min.js"></script>
+    <script>
+        let chartConfig = {
+    type: 'gauge',
+    globals: {
+      fontSize: '25px',
+    },
+    plot: {
+      tooltip: {
+        borderRadius: '5px',
+      },
+      valueBox: {
+        text: 'Score:  %v', // default
+        fontSize: '35px',
+        placement: 'center',
+        rules: [
+          {
+            text: '%v<br>BUENO',
+            rule: '%v < 700',
+          },
+          {
+            text: '%v<br>REGULAR',
+            rule: '%v < 301 && %v > 700',
+          },
+          {
+            text: '%v<br>MALO',
+            rule: '%v =<  300',
+          },
+        ],
+      },
+      size: '100%',
+    },
+    plotarea: {
+      marginTop: '80px',
+    },
+    scaleR: {
+      aperture: 180,
+      center: {
+        visible: false,
+      },
+      item: {
+        offsetR: 0,
+        rules: [
+          {
+            offsetX: '25px',
+          },
+        ],
+      },
+      labels: ["MALO","", "REGULAR", "", "BUENO"],
+      maxValue: 1000,
+      minValue: 300,
+      ring: {
+        rules: [
+          {
+            backgroundColor: '#f44336',
+            rule: '%v <= 300',
+          },
+          {
+            backgroundColor: '#fcf60c',
+            rule: '%v > 301 && %v < 700',
+          },
+          {
+            backgroundColor: '#0ffc0c',
+            rule: '%v >= 700',
+          },
+        ],
+        size: '50px',
+      },
+      step: 333,
+      tick: {
+        visible: false,
+      },
+    },
+    series: [
+      {
+        values: [700], // starting value
+        animation: {
+          effect: 'ANIMATION_EXPAND_VERTICAL',
+          method: 'ANIMATION_BACK_EASE_OUT',
+          sequence: 'null',
+          speed: 900,
+        },
+        backgroundColor: 'black',
+        indicator: [0, 10, 10, 10, 0.75],
+      },
+    ],
+  };
+  
+  zingchart.render({
+    id: 'myChart',
+    data: chartConfig,
+    height: '100%',
+    width: '100%',
+  });
+    </script>
+</html>
